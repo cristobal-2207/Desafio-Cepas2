@@ -1,0 +1,34 @@
+<h1>Wines#index</h1>
+<p>Find me in app/views/wines/index.html.erb</p>
+<h1>Lista de Vinos</h1>
+
+<table class="table">
+
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Cepas</th>
+      <th colspan>"3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wines.each do |wine| %>
+      <tr>
+        <td><%= wine.name %></td>
+        <td><%= wine.price %></td>
+        <td><%= wine.strains_detail %></td>
+        <% if current_user&.admin? %>
+          <td><%= link_to 'Show', wine %></td>
+          <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
+          <td><%= link_to 'Destroy', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New wine', new_wine_path %>
